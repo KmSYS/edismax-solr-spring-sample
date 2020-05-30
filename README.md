@@ -1,0 +1,1 @@
+# spring-solr-edismax-template
