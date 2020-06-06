@@ -36,11 +36,9 @@ public class SpringSolrEdismaxTemplateApplication implements CommandLineRunner {
     }
 
     private void insertSampleProduct() {
-        //clear data
-        solrTemplate.delete(solrCoreName, new SimpleQuery("*:*"));
-        solrTemplate.commit(solrCoreName);
+        clearData();
 
-        //insert 3 products
+        //insert first product
         SolrInputDocument phone = new SolrInputDocument();
         phone.addField("id", "p0001");
         phone.addField("name", "phone");
@@ -48,6 +46,7 @@ public class SpringSolrEdismaxTemplateApplication implements CommandLineRunner {
         solrTemplate.saveDocument(solrCoreName, phone);
         solrTemplate.commit(solrCoreName);
 
+        //insert second product
         SolrInputDocument phoneCover = new SolrInputDocument();
         phoneCover.addField("id", "p0002");
         phoneCover.addField("name", "phone cover");
@@ -55,11 +54,18 @@ public class SpringSolrEdismaxTemplateApplication implements CommandLineRunner {
         solrTemplate.saveDocument(solrCoreName, phoneCover);
         solrTemplate.commit(solrCoreName);
 
+        //insert third product
         SolrInputDocument wirelessCharger = new SolrInputDocument();
         wirelessCharger.addField("id", "p0003");
         wirelessCharger.addField("name", "wireless charger");
         wirelessCharger.addField("description", "term9 term10 term11 term12");
         solrTemplate.saveDocument(solrCoreName, wirelessCharger);
+        solrTemplate.commit(solrCoreName);
+    }
+
+    private void clearData() {
+        //clear data
+        solrTemplate.delete(solrCoreName, new SimpleQuery("*:*"));
         solrTemplate.commit(solrCoreName);
     }
 
